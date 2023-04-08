@@ -1,0 +1,98 @@
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  height: 103px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* SEARCH */
+.searchDiv {
+  border: 1px solid rgb(215, 210, 210);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  margin-left: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.inputSearch {
+  font-size: 14px;
+  font-family: RobotoCondensed;
+  border-radius: 2px;
+  width: 400px;
+  height: 40px;
+  border: none;
+  padding-left: 15px;
+}
+.inputSearch:focus {
+  outline: 0;
+}
+
+.btnSearch {
+  background-color: rgb(43, 40, 40);
+  color: white;
+  padding: 0 10px;
+  cursor: pointer;
+  height: 40px;
+}
+
+.img {
+  height: 80px;
+  width: auto;
+}
+
+.divUserContainer {
+  transition: all 200ms ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 250px;
+  font-family: Bebas;
+  font-size: large;
+}
+
+.divLogin {
+  background-color: white;
+  transition: all 200ms ease;
+}
+
+.divLogin:hover {
+  font-weight: bold;
+  background-color: white;
+}
+
+.cartContainer {
+  transition: all 200ms ease;
+}
+.cartContainer:hover {
+  font-weight: bold;
+  transform: scale(1.05);
+}
+
+.cartSpan {
+  padding-left: 1rem;
+}
+
+.divLogin {
+  margin-left: -5rem;
+}
+
+.sellButton {
+  transition: all 200ms ease;
+}
+
+.sellButton:hover {
+  font-weight: bold;
+  transform: scale(1.05);
+}

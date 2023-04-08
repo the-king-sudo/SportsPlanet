@@ -1,0 +1,55 @@
+html body {
+  /* background-image: url('./images/fondo.jpg'); */
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "SportWorld"; /*Can be any text*/
+  src: local("SportWorld"), url("./fonts/SportsWorld.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Seriously"; /*Can be any text*/
+  src: local("Seriously"), url("./fonts/Seriously.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "aBlackLives"; /*Can be any text*/
+  src: local("aBlackLives"), url("./fonts/aBlackLives.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RobotoThin"; /*Can be any text*/
+  src: local("RobotoThin"), url("./fonts/RobotoThin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "RobotoCondensed"; /*Can be any text*/
+  src: local("RobotoCondensed"),
+    url("./fonts/RobotoCondensed.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bebas"; /*Can be any text*/
+  src: local("Bebas"), url("./fonts/Bebas.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MetroPoliceRegular"; /*Can be any text*/
+  src: local("MetroPoliceRegular"),
+    url("./fonts/MetroPoliceRegular.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "MetroPoliceLight"; /*Can be any text*/
+  src: local("MetroPoliceLight"),
+    url("./fonts/MetroPoliceLight.otf") format("truetype");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
