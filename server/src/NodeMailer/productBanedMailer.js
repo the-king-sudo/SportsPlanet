@@ -45,13 +45,13 @@ const eMailBaned = async (product) => {
         
         <div style="display: flex; padding: 20px 10px 20px 10px; ">
           <div style=" padding: 10px 0px 10px 0px; width: 100%; text-align: center;">
-            <img src="https://i.ibb.co/8s8Kwjc/Sports-Planet.jpg" alt="" style="width: 300px;" />
+            <img src="https://lh3.googleusercontent.com/5eEGb8y-_1ZO7xY3dbfn9i2yniw4k-dL92ApzpC6a8_yIa9C438N2XmmKLee3wWDiu5VK9EoZXR1eIf6MuqjoBvGuMoaBzu89s9ph568" alt="" style="width: 300px;" />
             <p >For inquiries or support you can contact us through our digital channels sportplanet.mp@gmail.com </p>
           </div>
         </div>
         <P style="margin-bottom: 10px;"><i>Sincerely:</i><br> SportPlanet </P>
         <a style="background-color: rgb(5, 23, 124); border: 2px solid rgb(8, 8, 8); color:#FFFFFF; padding: 16px 32px; text-align: center; text-decoration: none; font-weight: bold; display: inline-block; font-size: 16px; margin: 4px 2px;
-        transition-duration: 0.4s; cursor: pointer;" href="https://sport-planet.vercel.app/">SportPlanet</a>
+        transition-duration: 0.4s; cursor: pointer;"href="https://sport-planet.vercel.app/">SportPlanet</a>
        
          
           <p style="background-color: black; padding: 10px 0px 10px 0px ; color:#FFFFFF; font-size: 12 !important;">
@@ -74,7 +74,7 @@ const eMailBaned = async (product) => {
     attachments: [
       {
         filename: "RC1.jpg",
-        path: "https://i.ibb.co/8s8Kwjc/Sports-Planet.jpg",
+        path: "https://lh3.googleusercontent.com/5eEGb8y-_1ZO7xY3dbfn9i2yniw4k-dL92ApzpC6a8_yIa9C438N2XmmKLee3wWDiu5VK9EoZXR1eIf6MuqjoBvGuMoaBzu89s9ph568",
         cid: "RC1",
       },
     ],

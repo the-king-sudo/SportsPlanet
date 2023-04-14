@@ -1,4 +1,6 @@
 @urlApi = https://sportsplanet-production.up.railway.app
+# @urlApi = http://localhost:5000
+
 
 ### get all products
 GET {{urlApi}}/products
@@ -6,8 +8,8 @@ GET {{urlApi}}/products
 ### get name a product
 GET {{urlApi}}/products?name=boca
 
-### banear single user
-POST {{urlApi}}/products/642237fc8186e2e058d00515
+### banear single products
+POST {{urlApi}}/products/6428ca77bcb9e1cc9f8441f3
 
 
 ### create a product
@@ -16,35 +18,45 @@ Content-Type: application/json
 
 //Footwear
 {
- "name":"EEUU national team soccer jersey", 
+ "name":"Sneakers Under Armour Curry", 
  "productConditionals":[
  
- {  "color":"red",
-  "image":["https://i.ebayimg.com/thumbs/images/g/8DcAAOSw98RkEJlr/s-l300.jpg","https://m.media-amazon.com/images/I/61kxRclXwVL._AC_SX466_.jpg","https://static.nike.com/a/images/c_limit,w_318,f_auto/t_product_v1/kx7fc3d2fzp0bakd5dnx/camiseta-de-visitante-vapor-match-2019-de-ee-uu-gCbfhm.jpg"],
-  "size":[{"L":19},{"XL":8},{"XXL":10}]},
+ {  "color":"white",
+  "image":["https://kenlu.net/wp-content/uploads/2021/04/20210423-UA-Curry-1-31.jpg","https://ct.yimg.com/xd/api/res/1.2/n7CfPU4H5WlHawH.yIkxxg--/YXBwaWQ9eXR3YXVjdGlvbnNlcnZpY2U7aD0zODg7cT04NTtyb3RhdGU9YXV0bzt3PTcwMA--/https://s.yimg.com/ob/image/aa7a040a-abec-49fc-a258-90b7c1dc9bb2.jpg","https://kenlu.net/wp-content/uploads/2021/04/20210423-UA-Curry-1-27.jpg"],
+  "size":[{"7'5": 12},{"8": 9},{"9": 4}]},
   
- { "color":"white",
-  "image":["https://www.camisetasfutboleses.com/image/cache/catalog/camisetafutbolespan/Camiseta-ESTADOS-UNIDOS-Primera-Equipaci%C3%B3n-Mundial-Qatar-2022-500x500.jpg","https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/2259b8c2-4d6e-4f2d-b9a9-d0e869786512/jersey-de-f%C3%BAtbol-dri-fit-de-la-selecci%C3%B3n-de-f%C3%BAtbol-femenino-de-ee-uu-local-2022-23-stadium-alex-morgan-DxSbZm.png","https://www.camiseta-de-futbol.com/wp-content/uploads/2022/09/usa-camisetas-2022-2023.jpg"],
-  "size":[{"S":19},{"M":22},{"L":15}]}
+ { "color":"purple",
+  "image":["https://cdn.weartesters.com/wp-content/uploads/2015/01/Under-Armour-Curry-One-Dark-Matter-for-NBA-All-Star-1.jpg","https://i.ebayimg.com/images/g/P-kAAOSw9kFjqauo/s-l1200.jpg","https://i.ebayimg.com/thumbs/images/g/k14AAOSwiwRj9atc/s-l300.jpg"],
+  "size":[{"8": 32},{"8'5": 19},{"9": 41},{"9'5": 61}]},
+  
+ { "color":"blue",
+  "image":["https://sneakernews.com/wp-content/uploads/2021/10/ua-curry-one-3026047-400.jpg?w=780","https://images.stockx.com/images/Under-Armour-Curry-1-Retro-Home-2021.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1639998083","https://laverdadnoticias.com/__export/1593467337095/sites/laverdad/img/2020/06/29/revelan_por_que_stephen_curry_dejo_a_nike_para_firmar_con_under_armor.jpg_673822677.jpg"],
+  "size":[{"8": 7},{"8'5": 12},{"9": 6},{"9'5": 9}]} 
   
   ],
- "price":18.000,
+ "price":54.99,
+ "user":"6431bb0f80761ad3170814ae",
  "discount":0,
- "description":"EEUU Soccer Jersey 2022-2023 World Cup.",
- "user":"6431be1d80761ad3170814de",
- "season":2023 ,
- "category": "tshirts",
- "gender":"women",
+ "description":"Inspired by streetball players from around the world, these shoes are durable enough to rule any court. The durable rubber outsole, breathable open mesh, and abrasion-resistant overlays let you play anywhere from hardwood to asphalt.",
+ "season":2021,
+ "category": "footwear",
+ "gender":"men",
  "state":"new",
- "brands":"NIKE"
+ "brands":"UNDER ARMOUR"
 }
 
 
 
 ### update a product
-PUT {{urlApi}}/products/6431d56b80761ad3170815c2
+PUT {{urlApi}}/products/6432c1f178fa18b04967c271
 Content-Type: application/json
 
 {
- "name": "Portugal  national team soccer jersey"
+ "season": 2015
 }
+
+
+//
+
+
+//
