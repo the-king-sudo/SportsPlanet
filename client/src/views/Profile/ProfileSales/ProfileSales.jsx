@@ -1,28 +1,41 @@
 import React from "react";
 import style from "./ProfileSales.module.css";
 import { NavBar } from "../../../Components/Navbar/Navbar";
+import ProfileProductCard from "../ProfileProductCard/ProfileProductCard";
+import { Paginate } from "../../../Components/Paginate/Paginate";
 import { useDispatch, useSelector } from "react-redux";
-import ProductCard from "../../../Components/ProductCard/ProductCard";
 import { Link } from "react-router-dom";
 import {
   FaShoppingBag,
   FaDollarSign,
   FaHeart,
   FaQuestionCircle,
-  FaSadTear,
   FaUserCircle,
   FaStore,
+  FaSadTear,
 } from "react-icons/fa";
 
-export default function ProfileSales() {
-  const dispatch = useDispatch();
+import { MdRateReview } from "react-icons/md";
 
-  const products = useSelector((state) => state.userProducts);
+export default function ProfileSales() {
+  const allProducts = useSelector((state) => state.allProducts);
+  const filteredProducts = allProducts.filter((product) => product.price >= 30);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const productsPerPage = 8;
+  const last = currentPage * productsPerPage;
+  const first = last - productsPerPage;
+  const products = filteredProducts.slice(first, last);
+
+  const setPagination = (page) => {
+    return setCurrentPage(page);
+  };
   return (
     <div className={style.container}>
       <NavBar />
       <div className={style.userPanel}>
         <div className={style.filterPanel}>
+          <h1 className={style.userPanelTitle}>User Panel</h1>
+          <hr />
           <Link to="/profile">
             <div className={style.filter}>
               <FaUserCircle />
@@ -51,6 +64,13 @@ export default function ProfileSales() {
             </div>
           </Link>
 
+          <Link to="/profile/reviews">
+            <div className={style.filter}>
+              <MdRateReview />
+              <h3 className={style.myReviews}>MY REVIEWS</h3>
+            </div>
+          </Link>
+
           <Link to="/profile/favorites">
             <div className={style.filter}>
               <FaHeart />
@@ -72,12 +92,11 @@ export default function ProfileSales() {
               products.map((product) => {
                 return (
                   <Link to={`/detail/${product._id}`}>
-                    <ProductCard
+                    <ProfileProductCard
                       key={crypto.randomUUID()}
                       _id={product._id}
                       name={product.name}
-                      image={product.image}
-                      size={product.size}
+                      image={product.productConditionals[0].image[1]}
                       price={product.price}
                       description={product.description}
                     />
@@ -91,6 +110,13 @@ export default function ProfileSales() {
               </p>
             )}
           </div>
+          <Paginate
+            productsPerPage={productsPerPage}
+            allProducts={products.length}
+            setPagination={setPagination}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
     </div>

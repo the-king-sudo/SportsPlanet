@@ -6,6 +6,8 @@ import { Paginate } from "../../Paginate/Paginate";
 import { Link } from "react-router-dom";
 import { NavBar } from "../../Navbar/Navbar";
 import FilterNavBar from "../../FilterNavBar/FilterNavBar";
+import Filters from "../../Filters/Filters";
+import Footer from "../../Footer/Footer";
 import style from "./Adidas.module.css";
 
 export default function Adidas() {
@@ -14,7 +16,7 @@ export default function Adidas() {
     dispatch(getAllProduct());
   }, [dispatch]);
 
-  const allProducts = useSelector((state) => state.allProducts);
+  const allProducts = useSelector((state) => state.filteredProducts);
   const filterProducts = allProducts.filter((product) => {
     return product.brands === "ADIDAS";
   });
@@ -33,6 +35,7 @@ export default function Adidas() {
     <div>
       <NavBar />
       <FilterNavBar />
+      <Filters SizeFilter={true} GenderFilter={true} WearedFilter={true} SeasonFilter={true} ResetFilters={true}/>
 
       <div className={style.container}>
         {products.length > 0 ? (
@@ -43,7 +46,7 @@ export default function Adidas() {
                   key={crypto.randomUUID()}
                   _id={product._id}
                   name={product.name}
-                  image={product.image}
+                  image={product.productConditionals[0].image[1]}
                   size={product.size}
                   price={product.price}
                   description={product.description}
@@ -52,17 +55,20 @@ export default function Adidas() {
             );
           })
         ) : (
-          <p className={style.loading}>LOADING...</p>
+          <p className={style.loading}>NO ÍTEMS FOUND...</p>
         )}
       </div>
 
-      <Paginate
-        productsPerPage={productsPerPage}
-        allProducts={filterProducts.length}
-        setPagination={setPagination}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      {products.length > 0 ? (
+        <Paginate
+          productsPerPage={productsPerPage}
+          allProducts={filterProducts.length}
+          setPagination={setPagination}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      ) : null}
+      <Footer />
     </div>
   );
 }

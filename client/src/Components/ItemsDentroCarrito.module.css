@@ -1,0 +1,16 @@
+.border {
+  width: 20px;
+  height: 20px;
+  margin-top: -25px;
+}
+
+.items {
+  padding: 2px;
+  text-align: center;
+  color: rgb(1, 253, 38);
+  font-size: 15px;
+  font-family: RobotoCondensed;
+  font-weight: bolder;
+  border-radius: 50%;
+  vertical-align: top;
+}
