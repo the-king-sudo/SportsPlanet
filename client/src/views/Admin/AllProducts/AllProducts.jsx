@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./AllProducts.module.css";
 import { NavBar } from "../../../Components/Navbar/Navbar";
+import FilterNavBar from "../../../Components/FilterNavBar/FilterNavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -18,6 +19,7 @@ import {
 import { MdRateReview } from "react-icons/md";
 import { getAllProduct } from "../../../redux/Actions/actions";
 import AdminProfileCard from "../AdminProfileCard/AdminProfileCard";
+import AdminProductCard from "../AdminProductCard/AdminProductCard";
 import { Paginate } from "../../../Components/Paginate/Paginate";
 
 export default function AllProducts() {
@@ -42,6 +44,7 @@ export default function AllProducts() {
   return (
     <div className={style.container}>
       <NavBar />
+      <FilterNavBar />
       <div className={style.userPanel}>
         <div className={style.filterPanel}>
           <h1 className={style.filterPanelTitle}>User Panel</h1>
@@ -88,7 +91,7 @@ export default function AllProducts() {
             </div>
           </Link>
 
-          <Link to="/help">
+          <Link to="/faq">
             <div className={style.filter}>
               <FaQuestionCircle />
               <h3 className={style.help}>HELP</h3>
@@ -118,7 +121,7 @@ export default function AllProducts() {
             {products.length > 0 ? (
               products.map((product) => {
                 return (
-                  <AdminProfileCard
+                  <AdminProductCard
                     key={crypto.randomUUID()}
                     _id={product._id}
                     name={product.name}

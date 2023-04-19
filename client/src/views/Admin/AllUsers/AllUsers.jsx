@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./AllUsers.module.css";
 import { NavBar } from "../../../Components/Navbar/Navbar";
+import FilterNavBar from "../../../Components/FilterNavBar/FilterNavBar";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -18,6 +19,7 @@ import {
 import { MdRateReview } from "react-icons/md";
 import { getAllUser } from "../../../redux/Actions/actions";
 import AdminProfileCard from "../AdminProfileCard/AdminProfileCard";
+import AdminProductCard from "../AdminProductCard/AdminProductCard";
 import { Paginate } from "../../../Components/Paginate/Paginate";
 
 export default function AllUsers() {
@@ -42,6 +44,7 @@ export default function AllUsers() {
   return (
     <div className={style.container}>
       <NavBar />
+      <FilterNavBar />
       <div className={style.userPanel}>
         <div className={style.filterPanel}>
           <h1 className={style.userPanelTitle}>User Panel</h1>
@@ -88,7 +91,7 @@ export default function AllUsers() {
             </div>
           </Link>
 
-          <Link to="/help">
+          <Link to="/faq">
             <div className={style.filter}>
               <FaQuestionCircle />
               <h3 className={style.help}>HELP</h3>
@@ -118,12 +121,14 @@ export default function AllUsers() {
             {users.length > 0 ? (
               users.map((user) => {
                 return (
-                  <AdminProfileCard
+                  <AdminProductCard
                     key={crypto.randomUUID()}
                     _id={user._id}
                     name={user.name}
                     image={user.image}
                     baneado={user.baneado}
+                    lastName={user.lastName}
+                    roll={user.roll}
                   />
                 );
               })
@@ -135,8 +140,8 @@ export default function AllUsers() {
             )}
           </div>
           <Paginate
-            usersPerPage={usersPerPage}
-            allUsers={allUsers.length}
+            productsPerPage={usersPerPage}
+            allProducts={allUsers.length}
             setPagination={setPagination}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}

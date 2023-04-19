@@ -20,6 +20,7 @@ import {
   ADD_REVIEW,
   REMOVE_ONE_ITEM,
   RESET_FILTERS,
+  GET_ALL_REVIEWS,
 } from "./actionsTypes";
 
 export const getAllUser = () => async (dispatch) => {
@@ -189,6 +190,7 @@ export const removeProduct = (id) => {
 };
 
 export const shop = (item) => {
+  console.log("🚀 ~ file: actions.js:192 ~ shop ~ item:", item);
   return async function (dispatch) {
     const apic = await axios.post("/payments", item);
     const shop = apic.data.url;
@@ -201,9 +203,13 @@ export const shop = (item) => {
 };
 
 export const addReview = (payload) => {
-  return async function () {
+  return async function (dispatch) {
     const review = await axios.post("/productReview", payload);
-    return review;
+    dispatch({
+      type: ADD_REVIEW,
+      payload: review.data,
+    });
+    return review
   };
 };
 export const resetFilters = (payload) => {
@@ -212,3 +218,13 @@ export const resetFilters = (payload) => {
     payload: payload,
   };
 };
+
+export const getAllReviews = () => {
+  return async function (dispatch) {
+    const reviews = await axios.get("/productReview");
+    dispatch({
+      type: GET_ALL_REVIEWS,
+      payload: reviews.data,
+    });
+  };
+} 

@@ -23,18 +23,23 @@ import "swiper/css/effect-coverflow";
 import Loader from "../../Components/Loader/Loader";
 import RelatedProducts from "./RelatedProducts";
 import ButtonBack from "../../Components/ButtonBack/ButtonBack";
+import Footer from "../../Components/Footer/Footer";
 import Swal from "sweetalert2";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getAllUser } from "../../redux/Actions/actions";
+import { getAllUser, getAllReviews } from "../../redux/Actions/actions";
 import Login from "../../Components/Navbar/Login";
+import SellerUser from "./SellerUser";
+import FilterNavBar from "../../Components/FilterNavBar/FilterNavBar";
 
 export default function Detail() {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
   const { isAuthenticated, user, logout } = useAuth0();
+  
 
   useEffect(() => {
-    dispatch(getProductDetail(id));
+    dispatch(getProductDetail(id)).then(() => setIsLoading(false));
     dispatch(getAllProduct());
   }, [dispatch, id]);
 
@@ -52,7 +57,8 @@ export default function Detail() {
     gender,
     brands,
     discount,
-    user1;
+    user1,
+    review;
 
   if (product) {
     name = product.name;
@@ -71,8 +77,12 @@ export default function Detail() {
       size = [...product.productConditionals[0].size];
     }
 
-    if (product.user1) {
-      user1 = product.user1;
+    if (product.user) {
+      user1 = product.user;
+    }
+
+    if (product.review) {
+      review = product.review;
     }
   }
 
@@ -133,12 +143,14 @@ export default function Detail() {
       id: _id,
       name: name,
       price: price,
-      color: selectedProduct.color,
-      image: selectedProduct.image[0],
+      color: selectedProduct?.color,
+      image: selectedProduct?.image[0],
       size: sizes || "amount",
       stock: select,
       discount: discount,
       UUID: UUID,
+      eMail: userE.eMail,
+      userID: userE._id,
     };
   }
 
@@ -166,9 +178,42 @@ export default function Detail() {
       products.category === category &&
       products._id !== _id
   );
-  const arrayFilterProducts = filterProducts.slice(0, 6);
+
+  let arrayFilterProducts = filterProducts.slice(0, 5);
+  arrayFilterProducts = arrayFilterProducts.filter((elem) => !elem.baneado);
 
   ///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+  ///--------------------------------------------------------------------Promedio reviews---------------------------------------------------------------------------------------------//
+  
+  const [average, setAverage] = useState(0);
+  useEffect(() => {
+    dispatch(getAllReviews());
+  }, [dispatch]);
+
+  const allReviews = useSelector((state) => state.reviews);
+
+  const reviews = allReviews?.filter((r) => review?.includes(r._id));
+  
+  let qualityTotal = 0;
+  let comfortTotal = 0;
+  let recommendTotal = 0;
+
+  useEffect(() => {
+    if (reviews.length > 0) {
+      for (let i = 0; i < reviews.length; i++) {
+        const review2 = reviews[i];
+        qualityTotal += review2.quality;
+        comfortTotal += review2.comfort;
+        recommendTotal += review2.recommended;
+      }
+    }
+    const prom = (qualityTotal + comfortTotal + recommendTotal) / 3;
+    setAverage(prom);
+  }, [reviews])
+  
+  ///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+  
 
   const ShowProduct = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -176,6 +221,9 @@ export default function Detail() {
     return (
       <>
         <div className="container">
+          <div className="back">
+            <ButtonBack />
+          </div>
           <main>
             <section className="thumbnails">
               <div
@@ -216,12 +264,12 @@ export default function Detail() {
             {/* content */}
             <section className="content">
               <p className="company">{brands}</p>
-              <Rating name="read-only" value={2} readOnly />
+              <Rating name="read-only" value={Math.round(average)} readOnly />
               <h1 className="title">{name}</h1>
               <p className="info">{description}</p>
               <div className="price">
                 <div className="new-price">
-                  <p className="now">${price}</p>
+                  <p className="now">💲 {price}</p>
                 </div>
               </div>
               <div className="colors">
@@ -300,30 +348,27 @@ export default function Detail() {
     );
   };
 
-  const [loading, setLoading] = useState(true);
-
-  if (loading === true) {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }
-
-  if (loading) {
-    return (
-      <div className="loader">
-        <Loader />
-      </div>
-    );
-  } else {
-    return (
-      <>
-        <NavBar />
-        <div className="back">
-          <ButtonBack />
+  return (
+    <>
+      {isLoading ? (
+        <div className="loader">
+          <Loader />
         </div>
-        <ShowProduct />
-        <RelatedProducts products={arrayFilterProducts} />
-      </>
-    );
-  }
+      ) : (
+        <>
+          <NavBar />
+          <FilterNavBar />
+
+          {/* <SellerUser user={user1} /> */}
+          <ShowProduct />
+          <div className="related-container">
+            <RelatedProducts products={arrayFilterProducts} />
+          </div>
+          <div className="footer">
+            <Footer />
+          </div>
+        </>
+      )}
+    </>
+  );
 }
