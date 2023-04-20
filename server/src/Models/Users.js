@@ -65,11 +65,11 @@ const userSchema = mongoose.Schema(
       type: Array,
     },
 
-    myShopping: {
+    pendingReviews: {
       type: Array,
     },
 
-    pendingReviews: {
+    myShopping: {
       type: Array,
     },
 
