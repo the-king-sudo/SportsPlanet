@@ -3,41 +3,54 @@ import style from "./AdminProducts.module.css";
 import { NavBar } from "../../../Components/Navbar/Navbar";
 import FilterNavBar from "../../../Components/FilterNavBar/FilterNavBar";
 import { useDispatch, useSelector } from "react-redux";
-import ProfileProductCard from "../../Profile/ProfileProductCard/ProfileProductCard";
-import AdminProductCard from '../AdminProductCard/AdminProductCard'
+import AdminProductCard from "../AdminProductCard/AdminProductCard";
 import { Paginate } from "../../../Components/Paginate/Paginate";
 import { Link } from "react-router-dom";
-import { FaShoppingBag, FaDollarSign,FaHeart,FaQuestionCircle,FaSadTear,FaUserCircle,FaStore,FaUsers,FaListAlt } from "react-icons/fa";
-import { MdRateReview } from "react-icons/md";
-import { getAllUser } from "../../../redux/Actions/actions";
+import {
+  FaShoppingBag,
+  FaDollarSign,
+  FaHeart,
+  FaQuestionCircle,
+  FaSadTear,
+  FaUserCircle,
+  FaStore,
+  FaUsers,
+  FaListAlt,
+  FaSearch,
+} from "react-icons/fa";
+import { MdRateReview, MdSell } from "react-icons/md";
+import { getAllUser, searchProduct } from "../../../redux/Actions/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AdminProducts() {
+  const [input, setInput] = React.useState("");
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = React.useState(1);
+
   const setPagination = (page) => {
     return setCurrentPage(page);
   };
 
+  const inputChange = (event) => {
+    setInput(event.target.value);
+  };
+
   const { user } = useAuth0();
-  
-  useEffect(() => {
+
+  React.useEffect(() => {
     dispatch(getAllUser());
   }, [dispatch]);
 
   const allUsers = useSelector((state) => state.allUsers);
   const userDb = allUsers?.find((element) => element.eMail === user?.email);
 
-  const userProducts = userDb.product
+  const userProducts = userDb.product;
 
-  
   const productsPerPage = 8;
   const last = currentPage * productsPerPage;
   const first = last - productsPerPage;
-  const products = userProducts.slice(first, last)
-
-
+  const products = userProducts.slice(first, last);
 
   return (
     <div className={style.container}>
@@ -75,17 +88,17 @@ export default function AdminProducts() {
             </div>
           </Link>
 
-          <Link to="/dashboard/reviews">
-            <div className={style.filter}>
-              <MdRateReview />
-              <h3 className={style.myReviews}>MY REVIEWS</h3>
-            </div>
-          </Link>
-
           <Link to="/dashboard/favorites">
             <div className={style.filter}>
               <FaHeart />
               <h3 className={style.myFavorites}>FAVORITE PRODUCTS</h3>
+            </div>
+          </Link>
+
+          <Link to="/post/product">
+            <div className={style.filter}>
+              <MdSell />
+              <h3 className={style.sellProducts}>SELL PRODUCTS</h3>
             </div>
           </Link>
 
@@ -114,22 +127,41 @@ export default function AdminProducts() {
           </div>
         </div>
         <div className={style.productPanel}>
-          <h2 className={style.productPanelTitle}>YOUR PRODUCTS ON SALE</h2>
+          <div className={style.firstRow}>
+            <h2 className={style.productPanelTitle}>YOUR PRODUCTS ON SALE</h2>
+            {/* <input
+              type="text"
+              className={style.searchInput}
+              placeholder="Search product..."
+              value={input}
+              onChange={inputChange}
+            />
+
+            <button className={style.buttonSearch}>
+              <FaSearch />
+            </button> */}
+            <h2 className={style.totalProducts}>
+              Total Products: {userProducts.length}
+            </h2>
+          </div>
           <div className={style.productsContainer}>
             {products.length > 0 ? (
               products.map((product) => {
                 return (
-                  <Link to={`/detail/${product._id}`} key={product._id}>
-                    <AdminProductCard
-                      key={crypto.randomUUID()}
-                      _id={product._id}
-                      name={product.name}
-                      image={product.productConditionals[0].image[0]}
-                      price={product.price}
-                      description={product.description}
-                      baneado={product.baneado}
-                    />
-                  </Link>
+                  <AdminProductCard
+                    key={crypto.randomUUID()}
+                    _id={product._id}
+                    name={product.name}
+                    image={product.productConditionals[0].image[0]}
+                    price={product.price}
+                    description={product.description}
+                    baneado={product.baneado}
+                    discount={product.discount}
+                    season={product.season}
+                    gender={product.gender}
+                    state={product.state}
+                    brands={product.brands}
+                  />
                 );
               })
             ) : (
@@ -151,4 +183,3 @@ export default function AdminProducts() {
     </div>
   );
 }
-

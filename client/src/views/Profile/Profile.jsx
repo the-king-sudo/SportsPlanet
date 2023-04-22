@@ -5,7 +5,6 @@ import FilterNavBar from "../../Components/FilterNavBar/FilterNavBar";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileCard from "./ProfileCard/ProfileCard";
 import { Link } from "react-router-dom";
-
 import {
   FaShoppingBag,
   FaDollarSign,
@@ -58,13 +57,6 @@ export const Profile = () => {
             </div>
           </Link>
 
-          <Link to="/profile/reviews">
-            <div className={style.filter}>
-              <MdRateReview />
-              <h3 className={style.myReviews}>MY REVIEWS</h3>
-            </div>
-          </Link>
-
           <Link to="/profile/favorites">
             <div className={style.filter}>
               <FaHeart />
@@ -90,7 +82,6 @@ export const Profile = () => {
           <h2 className={style.profilePanelTitle}>YOUR PROFILE</h2>
           <div className={style.profileContainer}>
             <ProfileCard />
-            <div className={style.profileDescription}>USER DESCRIPTION</div>
           </div>
         </div>
       </div>

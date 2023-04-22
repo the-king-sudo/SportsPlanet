@@ -59,12 +59,7 @@ export default function Admin() {
             </div>
           </Link>
 
-          <Link to="/dashboard/reviews">
-            <div className={style.filter}>
-              <MdRateReview />
-              <h3 className={style.myReviews}>MY REVIEWS</h3>
-            </div>
-          </Link>
+         
 
           <Link to="/dashboard/favorites">
             <div className={style.filter}>
@@ -108,7 +103,6 @@ export default function Admin() {
           <h2 className={style.profilePanelTitle}>YOUR PROFILE</h2>
           <div className={style.profileContainer}>
             <ProfileCard />
-            <div className={style.profileDescription}>USER DESCRIPTION</div>
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ import {
   FaStore,
 } from "react-icons/fa";
 
-import { MdRateReview } from "react-icons/md";
+import { MdRateReview, MdSell } from "react-icons/md";
 
 export default function ProfileReviews() {
   return (
@@ -55,17 +55,17 @@ export default function ProfileReviews() {
             </div>
           </Link>
 
-          <Link to="/profile/reviews">
-            <div className={style.filter}>
-              <MdRateReview />
-              <h3 className={style.myReviews}>MY REVIEWS</h3>
-            </div>
-          </Link>
-
           <Link to="/profile/favorites">
             <div className={style.filter}>
               <FaHeart />
               <h3 className={style.myFavorites}>FAVORITE PRODUCTS</h3>
+            </div>
+          </Link>
+
+          <Link to="/post/product">
+            <div className={style.filter}>
+              <MdSell />
+              <h3 className={style.sellProducts}>SELL PRODUCTS</h3>
             </div>
           </Link>
 
